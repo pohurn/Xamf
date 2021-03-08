@@ -16,5 +16,9 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
         <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Country}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding CountryDescription}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
     </Grid>
 </ContentPage>
