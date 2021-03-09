@@ -16,13 +16,13 @@ namespace xamf.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<Recipe> GetAllRecipes() {
+        public async Task<Recipe> GetAllRecipes(int pagesize) {
 
             Recipe RecipesReceived = new Recipe();
 
             try
             {
-                RecipesReceived = await _requestProvider.GetAsync<Recipe>(Constants.SERVER_URL);
+                RecipesReceived = await _requestProvider.GetAsync<Recipe>(Constants.SERVER_URL + "?p=" + pagesize);
             }
             catch
             {

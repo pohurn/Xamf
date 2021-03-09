@@ -18,6 +18,8 @@ namespace xamf.ViewModels
     {
         IApiService _apiService;
         private ObservableCollection<menus> allrecipes = new ObservableCollection<menus>();
+        private int pagesize = 1;
+        private int items;
 
         public RecipeViewModel(INavigation navigation, IUserDialogs dialogs, IPopupNavigation popupNavigation, IApiService apiService)
         {
@@ -32,21 +34,22 @@ namespace xamf.ViewModels
                 try
                 {
                     Dialogs?.ShowLoading("Fetching recipes for you...");
-                    AllRecipes.Clear();
                     if (Connectivity.NetworkAccess == NetworkAccess.Internet)
                     {
                         try
                         {
-                            var RecipesRetrieved = await _apiService.GetAllRecipes();
+                            var RecipesRetrieved = await _apiService.GetAllRecipes(PageSize);
                             if (RecipesRetrieved != null)
                             {
                                 if(RecipesRetrieved.results.Count > 0)
                                 {
-                                    foreach(var item in RecipesRetrieved.results)
+                                    foreach(var data in RecipesRetrieved.results)
                                     {
-                                        AllRecipes.Add(item);
+                                        AllRecipes.Add(data);
                                     }
                                 }
+                                PageSize++;
+                                Items = (AllRecipes.Count) - 1;
                                 Dialogs?.HideLoading();
                             }
                             else
@@ -95,6 +98,18 @@ namespace xamf.ViewModels
         {
             get { return allrecipes; }
             set { allrecipes = value; OnPropertyChanged(); }
+        }
+
+        public int PageSize
+        {
+            get { return pagesize; }
+            set { pagesize = value; OnPropertyChanged(); }
+        }
+
+        public int Items
+        {
+            get { return items; }
+            set { items = value; OnPropertyChanged(); }
         }
     }
 }

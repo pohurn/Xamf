@@ -18,8 +18,8 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="All Recipes" FontSize="Medium" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
-        <CollectionView x:Name="RecipeCollection" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AllRecipes}" SelectionChanged="OnSelectingRecipe" SelectionMode="Single" HorizontalScrollBarVisibility="Never" HeightRequest="400" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="An infinite list of Recipes for you!" FontSize="Medium" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
+        <CollectionView x:Name="RecipeCollection" Grid.Row="2" Grid.Column="1" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding FetchRecipesCommand}" ItemsSource="{Binding AllRecipes}" SelectionChanged="OnSelectingRecipe" SelectionMode="Single" HorizontalScrollBarVisibility="Never" HeightRequest="400" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="25" />
             </CollectionView.ItemsLayout>
@@ -57,7 +57,7 @@
                                     <RowDefinition Height="60"/>
                                 </Grid.RowDefinitions>
                                 <ffimageloading:CachedImage Grid.Row="0" Grid.RowSpan="3" Source="{Binding thumbnail}" FadeAnimationEnabled="True" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
-                                <Label Grid.Row="4" Margin="20,0" Text="{Binding ingredients, StringFormat='Main ingredients: {0}'}" TextColor="#777777" LineBreakMode="TailTruncation" MaxLines="2" FontSize="15.0"/>
+                                <Label Grid.Row="4" Margin="20,0" Text="{Binding ingredients, StringFormat='Main ingredients: {0}'}" TextColor="#777777" FontSize="15.0"/>
                                 <BoxView Grid.Row="6" BackgroundColor="#DCDCDC"  VerticalOptions="FillAndExpand" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20,0"/>
                                 <Grid Grid.Row="7" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0">
                                     <Grid.ColumnDefinitions>

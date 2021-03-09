@@ -8,6 +8,6 @@ namespace xamf.Services
 {
     public interface IApiService
     {
-        Task<Recipe> GetAllRecipes();
+        Task<Recipe> GetAllRecipes(int pagesize);
     }
 }
