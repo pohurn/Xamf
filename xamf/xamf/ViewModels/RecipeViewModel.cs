@@ -47,6 +47,7 @@ namespace xamf.ViewModels
                                         AllRecipes.Add(item);
                                     }
                                 }
+                                Dialogs?.HideLoading();
                             }
                             else
                             {

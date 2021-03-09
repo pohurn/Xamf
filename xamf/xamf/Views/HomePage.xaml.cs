@@ -21,7 +21,18 @@ namespace xamf.Views
         {
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
-            BindingContext = new ExampleViewModel(Navigation, UserDialogs.Instance, PopupNavigation.Instance, new ApiService(new RequestProvider()));
+            BindingContext = new RecipeViewModel(Navigation, UserDialogs.Instance, PopupNavigation.Instance, new ApiService(new RequestProvider()));
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((RecipeViewModel)BindingContext).FetchRecipesCommand.Execute(null);
+        }
+
+        private void OnSelectingRecipe(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

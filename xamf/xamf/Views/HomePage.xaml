@@ -1,13 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="xamf.Views.HomePage">
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             ios:Page.UseSafeArea="true"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             x:Class="xamf.Views.HomePage" BackgroundColor="#F4F5F8">
     <Grid RowSpacing="0" ColumnSpacing="0">
         <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="20"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -15,10 +18,52 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Name}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
-
-        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Country}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
-
-        <Label Grid.Row="3" Grid.Column="1" Text="{Binding CountryDescription}" FontSize="Medium" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" TextColor="Black"/>
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Text="All Recipes" FontSize="Medium" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontAttributes="Bold" TextColor="White" BackgroundColor="Black"/>
+        <CollectionView x:Name="RecipeCollection" Grid.Row="2" Grid.Column="1" ItemsSource="{Binding AllRecipes}" SelectionChanged="OnSelectingRecipe" SelectionMode="Single" HorizontalScrollBarVisibility="Never" HeightRequest="400" VerticalScrollBarVisibility="Never" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="25" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid VerticalOptions="EndAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0" IsClippedToBounds="True" BackgroundColor="#F4F5F8">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ffimageloading:CachedImage Grid.Row="0" Grid.Column="0" Source="{Binding thumbnail}" HeightRequest="30" WidthRequest="30" FadeAnimationEnabled="True" Aspect="AspectFit" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                            <ffimageloading:CachedImage.Transformations>
+                                <fftransformations:CircleTransformation/>
+                            </ffimageloading:CachedImage.Transformations>
+                        </ffimageloading:CachedImage>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding title}" TextColor="#34495E" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="10,0,0,0"/>
+                        <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderColor="#10000029" Padding="0" Margin="0" HasShadow="False" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="10" IsClippedToBounds="True">
+                            <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0" Padding="0" Margin="0" IsClippedToBounds="True">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="10"/>
+                                    <!--0-->
+                                    <RowDefinition Height="20"/>
+                                    <!--1-->
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="10"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <!--4-->
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="1"/>
+                                    <RowDefinition Height="60"/>
+                                </Grid.RowDefinitions>
+                                <ffimageloading:CachedImage Grid.Row="0" Grid.RowSpan="3" Source="{Binding thumbnail}" FadeAnimationEnabled="True" Aspect="AspectFill" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                                <Label Grid.Row="4" Margin="20,0" Text="{Binding ingredients, StringFormat='Ingredients: {0}'}" TextColor="#777777" LineBreakMode="TailTruncation" MaxLines="2" FontSize="15.0"/>
+                                <BoxView Grid.Row="6" BackgroundColor="#DCDCDC"  VerticalOptions="FillAndExpand" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="20,0"/>
+                             </Grid>
+                        </Frame>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
