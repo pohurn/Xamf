@@ -38,6 +38,12 @@ namespace xamf.ViewModels
                     {
                         try
                         {
+                            if(PageSize == 100) //max page size reached
+                            {
+                                Dialogs?.HideLoading();
+                                await Dialogs?.AlertAsync("The end of the list has been reached :(", "Notice", "OK");
+                                return;
+                            }
                             var RecipesRetrieved = await _apiService.GetAllRecipes(PageSize);
                             if (RecipesRetrieved != null)
                             {
@@ -55,7 +61,6 @@ namespace xamf.ViewModels
                             else
                             {
                                 Dialogs?.HideLoading();
-                                popupNavigation?.PopAsync();
                                 await Dialogs?.AlertAsync("No data found!. Please try again later.", "Error", "OK");
                             }
                         }

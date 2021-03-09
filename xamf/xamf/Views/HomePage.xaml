@@ -40,7 +40,7 @@
                                 <fftransformations:CircleTransformation/>
                             </ffimageloading:CachedImage.Transformations>
                         </ffimageloading:CachedImage>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding title}" TextColor="#34495E" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="10,0,0,0"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding title}" LineBreakMode="TailTruncation" TextColor="#34495E" FontSize="Medium" FontAttributes="Bold" VerticalTextAlignment="Center" Padding="10,0,0,0"/>
                         <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" BorderColor="#10000029" Padding="0" Margin="0" HasShadow="False" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" CornerRadius="10" IsClippedToBounds="True">
                             <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" RowSpacing="0" ColumnSpacing="0" Padding="0" Margin="0" IsClippedToBounds="True">
                                 <Grid.RowDefinitions>
