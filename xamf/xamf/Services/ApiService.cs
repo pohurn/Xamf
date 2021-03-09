@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using xamf.Models;
 using xamf.Services.RequestProvider;
 
 namespace xamf.Services
@@ -15,21 +16,20 @@ namespace xamf.Services
             _requestProvider = requestProvider;
         }
 
-        public async Task<string> GetName() {
+        public async Task<Recipe> GetAllRecipes() {
 
-            string name = string.Empty;
+            Recipe RecipesReceived = new Recipe();
 
             try
             {
-                //call api here
-                name = "Navin";
+                RecipesReceived = await _requestProvider.GetAsync<Recipe>(Constants.SERVER_URL);
             }
             catch
             {
-                name = string.Empty;
+                RecipesReceived = null;
                 throw;
             }
-            return name;
+            return RecipesReceived;
         }
     }
 }
